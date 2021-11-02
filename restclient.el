@@ -538,7 +538,7 @@ The buffer contains the raw HTTP response sent by the server."
 	(when restclient-curr-request-functions
 	  (add-hook 'restclient-response-loaded-hook 'restclient-single-request-function))
         (let* ((cmax (restclient-current-max))
-               (entity (restclient-parse-body (buffer-substring (min (point) cmax) cmax) vars))
+               (entity (restclient-parse-body (buffer-substring-no-properties (min (point) cmax) cmax) vars))
                (url (restclient-replace-all-in-string vars url)))
           (apply func method url headers entity args))))))
 
